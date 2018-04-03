@@ -12,7 +12,4 @@
  d = 10+300*rand(1,50);
  L = [10,20,15,11,12,30,10,40,23,21];
  D = 5+40*rand(N,K);
- [Gc,Gp] = initPop(G,N,S,K);
- C = Gc(:,:,3);
- P = Gp(:,:,3);
- fitness = computedFitness(C,P,K);
+ 

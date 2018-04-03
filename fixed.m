@@ -26,5 +26,15 @@ function [Gc,Gp] = fixed(Gc,Gp,K)
             end
         end
     end
+    for g = 1:GSize
+        for n = 1:N
+            sumP = sum(Gp(n,:,g));
+            for s = 1:S
+                if(Gp(n,s,g)~=0)
+                    Gp(n,s,g) = Gp(n,s,g)/sumP;
+                end
+            end
+        end
+    end
 end
 
