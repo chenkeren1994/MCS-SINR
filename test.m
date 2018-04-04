@@ -8,11 +8,14 @@
  S = 12;% 信道数
  K = 50;% 用户数
  
- Pmax=[100,200,150,110,120,300,100,400,230,210];
- d = 10+300*rand(1,50);
- L = [10,20,15,11,12,30,10,40,23,21];
- D = 5+40*rand(N,K);
+ gNumber = 500;
+ 
+ Pmax=csvread('./data/pmax.csv');
+ d = csvread('./data/need.csv');
+ L = csvread('./data/l.csv');
+ D = csvread('./data/distance.csv');
+ fitness = zeros(1,G);
  [Gc,Gp] = initPop(G,N,S,K);
- C = Gc(:,:,3);
- P = Gp(:,:,3);
- fitness = computedFitness(C,P,K);
+ for g = 1:G
+     fitness(g) = computedFitness(Gc(:,:,g),Gp(:,:,g),K);
+ end

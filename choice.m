@@ -1,4 +1,4 @@
-function [Gc,Gp] = choice( C1,P1 )
+function [Gc,Gp] = choice( C1,P1,K )
 % 轮盘赌选择
 % 输入：交叉后的种群，规模2m
 % 输出：选择后的种群规模m
@@ -10,8 +10,8 @@ function [Gc,Gp] = choice( C1,P1 )
     t = zeros(1,M);
     
     for g = 1:M
-%         t(g) = getTarget(C1(:,:,g),P1(:,:,g));
-        t(g) = randperm(100,1);
+        t(g) = computedFitness(C1(:,:,g),P1(:,:,g),K);
+%         t(g) = randperm(100,1);
     end
     
     % 将 {[粒子]，适值}放入元胞数组中

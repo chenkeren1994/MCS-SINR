@@ -7,9 +7,51 @@
  N = 10;% 基站数
  S = 12;% 信道数
  K = 50;% 用户数
+ gNumber = 500;
  
- Pmax=[100,200,150,110,120,300,100,400,230,210];
- d = 10+300*rand(1,50);
- L = [10,20,15,11,12,30,10,40,23,21];
- D = 5+40*rand(N,K);
+ Pmax=csvread('./data/pmax.csv');
+ d = csvread('./data/need.csv');
+ L = csvread('./data/l.csv');
+ D = csvread('./data/distance.csv');
+ 
+ fitness = zeros(1,gNumber);
+ Rc = zeros(N,S,gNumber);
+ Rp = zeros(N,S,gNumber);
+ 
+ % 初始化种群
+ [Gc,Gp] = initPop(G,N,S,K);
+ 
+ for g = 1:gNumber
+     % 交叉
+     [Gc,Gp] = multi_point_crossing(Gc,Gp);
+     
+     % 变异
+     
+     [ Gc,Gp ] = variation( Gc,Gp,K );
+     
+     % 修正
+     [Gc,Gp] = fixed(Gc,Gp,K);
+     
+     % 选择
+     [Gc,Gp] = choice(Gc,Gp,K);
+      
+     [resultC,resultP,t] = getMaxResult(Gc,Gp,K);
+     
+     
+     fitness(g) = t;
+     Rc(:,:,g) = resultC;
+     Rp(:,:,g) = resultP;
+ end
+ 
+ C = Rc(:,:,gNumber);
+ P = Rc(:,:,gNumber);
+ f = computedFitness(C,P,K);
+ 
+ csvwrite('./output/fitness.csv',fitness);
+ csvwrite('./output/gbestc.csv',C);
+ csvwrite('./output/gbestp.csv',P);
+ csvwrite('./output/bestfitness.csv',f);
+ 
+
+ 
  
