@@ -7,7 +7,7 @@
  N = 10;% 基站数
  S = 12;% 信道数
  K = 50;% 用户数
- gNumber = 500;
+ gNumber = 100;
  
  Pmax=csvread('./data/pmax.csv');
  d = csvread('./data/need.csv');
@@ -34,6 +34,8 @@
      
      % 选择
      [Gc,Gp] = choice(Gc,Gp,K);
+     
+     disp(g);
       
      [resultC,resultP,t] = getMaxResult(Gc,Gp,K);
      
@@ -44,14 +46,12 @@
  end
  
  C = Rc(:,:,gNumber);
- P = Rc(:,:,gNumber);
- f = computedFitness(C,P,K);
+ P = Rp(:,:,gNumber);
  
  csvwrite('./output/fitness.csv',fitness);
  csvwrite('./output/gbestc.csv',C);
  csvwrite('./output/gbestp.csv',P);
- csvwrite('./output/bestfitness.csv',f);
  
-
+ drawPicture(gNumber);
  
  
