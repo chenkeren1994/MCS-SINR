@@ -32,6 +32,9 @@
      % 修正
      [Gc,Gp] = fixed(Gc,Gp,K);
      
+     % 嵌套粒子群
+     [Gc,Gp,result_pso] = PSO(Gc,Gp,K,10);
+     
      % 选择
      [Gc,Gp] = choice(Gc,Gp,K);
      

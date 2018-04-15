@@ -3,7 +3,7 @@ function drawPicture( gNumber )
 %   Detailed explanation goes here
     x = 1:gNumber;
     y = csvread('./output/fitness.csv');
-    plot(x,y,'o');
+    plot(x,y,'.');
     xlabel('迭代次数');
     ylabel('适值');
 end
